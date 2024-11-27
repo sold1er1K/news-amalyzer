@@ -1,0 +1,60 @@
+.component {
+    margin-top: 60px;
+    border: 2px solid black;
+    border-radius: 15px;
+    height: 400px;
+    width: 80%;
+    padding: 20px;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.component-header {
+    position: absolute;
+    top: -16px;
+    left: 20px;
+    background-color: #ffffff;
+    padding: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.component-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.text-input {
+    display: flex;
+    height: 300px;
+    width: 100%;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgba(217, 217, 217, 0.4);
+    resize: none;
+    overflow-y: auto;
+    line-height: 1.5;
+}
+
+.submit-button {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 120px;
+}
+
+.submit-button:hover {
+    background-color: #333;
+}

@@ -15,3 +15,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const textInput = document.querySelector(".text-input");
+    const submitButton = document.querySelector(".submit-button");
+
+    submitButton.addEventListener("click", () => {
+        const inputValue = textInput.value;
+        console.log(inputValue);
+        textInput.value = "";
+    });
+});
