@@ -1,10 +1,74 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>News Analyzer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Analysis System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Adamina&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=agdasima@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'news_analyzer/css/layout.css' %}">
 </head>
 <body>
+    <div class="container">
+        <nav class="sidebar">
+            <div class="logo">
+                <img src="{% static 'news_analyzer/img/logo.svg' %}" alt="logo">
+            </div>
+            <ul class="links-wrapper">
+                <li class="nav-link">
+                    <a href="{% url 'news_analyzer:main_page' %}" class="nav-link-content">
+                        <span class="nav-link-icon">
+                            <img src="{% static 'news_analyzer/img/home.svg' %}" alt="home-icon">
+                        </span>
+                        <div class="nav-link-text">Main</div>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#" class="nav-link-content">
+                        <span class="nav-link-icon">
+                            <img src="{% static 'news_analyzer/img/history.svg' %}" alt="history-icon">
+                        </span>
+                        <div class="nav-link-text">History</div>
+                    </a>
+                </li>
+                <li class="nav-link">
+                    <a href="#" class="nav-link-content">
+                        <span class="nav-link-icon">
+                            <img src="{% static 'news_analyzer/img/analysis.svg' %}" alt="analysis-icon">
+                        </span>
+                        <div class="nav-link-text">Analysis</div>
+                    </a>
+                </li>
+            </ul>
+            <div class="nav-social">
+                <div class="social-item">
+                    <a href="https://t.me/sold1er1K">
+                        <img src="{% static 'news_analyzer/img/telegram.svg' %}" alt="telegram">
+                    </a>
+                </div>
+                <div class="social-item">
+                    <a href="https://github.com/sold1er1K">
+                        <img src="{% static 'news_analyzer/img/github.svg' %}" alt="github">
+                    </a>
+                </div>
+                <div class="social-item">
+                    <a href="https://www.linkedin.com/in/egor-soldatenkov-220142276/">
+                        <img src="{% static 'news_analyzer/img/linkedin.svg' %}" alt="linkedin">
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <div class="content-wrapper">
+            <h1>News Analysis System</h1>
+            <div class="divider"></div>
+            <div class="content-inner">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 
+    <script src="{% static 'news_analyzer/js/index.js' %}"></script>
 </body>
 </html>
