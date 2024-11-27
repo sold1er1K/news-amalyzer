@@ -1,0 +1,10 @@
+.idea
+.venv
+.env
+
+**/__pycache__/
+**/migrations/
+
+*.pyc
+*.pyo
+*.pyd
