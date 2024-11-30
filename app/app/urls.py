@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+import news_analyzer.views as news_analyzer
 
 
 urlpatterns = [
     path('', include('news_analyzer.urls', namespace='news_analyzer')),
+    path('api/add-news/', news_analyzer.add_news, name='add_news'),
+    path('api/analyze-news/', news_analyzer.analyze_news, name='analyze_news'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

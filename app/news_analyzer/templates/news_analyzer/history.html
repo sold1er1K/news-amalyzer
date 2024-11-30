@@ -1,0 +1,35 @@
+{% extends 'news_analyzer/layout.html' %}
+
+{% block content %}
+<h2>Таблица результатов</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Text</th>
+            <th>Result</th>
+            <th>Probability, %</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for news in page_obj %}
+        <tr>
+            <td>{{ news.id }}</td>
+            <td>{{ news.content|truncatewords:10 }}</td>  <!-- Ограничиваем текст -->
+            <td>{{ news.is_fake|yesno:"Fake,Not Fake" }}</td>
+            <td>{{ news.probability }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<div class="pagination">
+  <button class="page-prev">◀</button>
+  <span class="page-number" data-page="{{ page_obj.number }}">{{ page_obj.number }}</span>
+  /
+  <span class="total-pages">{{ total_pages }}</span>
+  <button class="page-next">▶</button>
+</div>
+
+{% endblock %}

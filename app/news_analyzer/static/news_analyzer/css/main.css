@@ -2,7 +2,7 @@
     margin-top: 60px;
     border: 2px solid black;
     border-radius: 15px;
-    height: 400px;
+    height: 500px;
     width: 80%;
     padding: 20px;
     position: relative;
@@ -28,7 +28,7 @@
 
 .text-input {
     display: flex;
-    height: 300px;
+    height: 400px;
     width: 100%;
     padding: 10px;
     border: 1px solid black;
@@ -57,4 +57,56 @@
 
 .submit-button:hover {
     background-color: #333;
+}
+
+/* Общие стили для модальных окон */
+#loaderModal, #resultModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* полупрозрачный фон */
+    display: none; /* Скрыто по умолчанию */
+    justify-content: center; /* Центровка по горизонтали */
+    align-items: center; /* Центровка по вертикали */
+    z-index: 1000; /* Модальные окна будут поверх всего */
+}
+
+/* Стили для лоадера */
+#loaderModal .loader {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+/* Анимация для лоадера */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Стили для содержимого модального окна с результатами */
+#resultModal .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 400px; /* Размер окна */
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Стили для текста результата */
+#resultTitle {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#probabilityText {
+    font-size: 18px;
+    color: #555;
 }

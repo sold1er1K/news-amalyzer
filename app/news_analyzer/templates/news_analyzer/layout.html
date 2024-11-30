@@ -9,6 +9,7 @@
     <link href="https://api.fontshare.com/v2/css?f[]=agdasima@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'news_analyzer/css/layout.css' %}">
     <link rel="stylesheet" href="{% static 'news_analyzer/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'news_analyzer/css/history.css' %}">
 </head>
 <body>
     <div class="container">
@@ -26,7 +27,7 @@
                     </a>
                 </li>
                 <li class="nav-link">
-                    <a href="#" class="nav-link-content">
+                    <a href="{% url 'news_analyzer:history_page' %}" class="nav-link-content">
                         <span class="nav-link-icon">
                             <img src="{% static 'news_analyzer/img/history.svg' %}" alt="history-icon">
                         </span>
@@ -71,5 +72,6 @@
     </div>
 
     <script src="{% static 'news_analyzer/js/index.js' %}"></script>
+    <script src="{% static 'news_analyzer/js/paginator.js' %}"></script>
 </body>
 </html>
