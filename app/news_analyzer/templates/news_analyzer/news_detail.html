@@ -1,0 +1,36 @@
+{% extends 'news_analyzer/layout.html' %}
+
+{% block content %}
+<style>
+  .news-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 85px);
+    flex-direction: column;
+    padding: 0 20px; /* Добавляем отступы для текста внутри контейнера */
+  }
+
+  .news-text {
+    width: 100%;
+    max-width: 800px;
+    max-height: 400px;
+    overflow-y: auto;
+    word-wrap: break-word;
+    text-align: justify;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+  }
+</style>
+<div class="news-container">
+  <h2>Details of News #{{ news.id }}</h2>
+  <p class="news-text">{{ news.content }}</p>
+  <p><strong>Result:</strong> {{ news.is_fake|yesno:"Fake,Not Fake" }}</p>
+  <p><strong>Probability:</strong> {{ news.probability }}%</p>
+</div>
+<a href="{% url 'news_analyzer:history_page' %}" class="return-button">Вернуться назад</a>
+{% endblock %}

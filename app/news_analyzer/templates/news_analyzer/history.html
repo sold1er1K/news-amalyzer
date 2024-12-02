@@ -10,15 +10,19 @@
             <th>Text</th>
             <th>Result</th>
             <th>Probability, %</th>
+            <th>Details</th> <!-- Новый столбец -->
         </tr>
     </thead>
     <tbody>
         {% for news in page_obj %}
         <tr>
             <td>{{ news.id }}</td>
-            <td>{{ news.content|truncatewords:10 }}</td>  <!-- Ограничиваем текст -->
+            <td>{{ news.content|truncatewords:10 }}</td>
             <td>{{ news.is_fake|yesno:"Fake,Not Fake" }}</td>
             <td>{{ news.probability }}</td>
+            <td>
+                <a href="{% url 'news_analyzer:news_detail' news.id %}" class="details-link">Подробнее</a>
+            </td>
         </tr>
         {% endfor %}
     </tbody>

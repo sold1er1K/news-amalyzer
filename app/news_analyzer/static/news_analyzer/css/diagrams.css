@@ -1,0 +1,40 @@
+.diagrams-container {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100% - 85px);
+}
+
+.return-button {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    padding: 15px;
+    font-size: 20px;
+    color: white;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(calc(50% - 25px));
+}
+
+.styled-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+canvas#newsChart {
+    width: 450px !important;
+    height: 450px !important;
+}

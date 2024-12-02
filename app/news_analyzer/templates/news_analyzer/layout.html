@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="{% static 'news_analyzer/css/layout.css' %}">
     <link rel="stylesheet" href="{% static 'news_analyzer/css/main.css' %}">
     <link rel="stylesheet" href="{% static 'news_analyzer/css/history.css' %}">
+    <link rel="stylesheet" href="{% static 'news_analyzer/css/analytics.css' %}">
+    <link rel="stylesheet" href="{% static 'news_analyzer/css/diagrams.css' %}">
 </head>
 <body>
     <div class="container">
@@ -26,7 +28,7 @@
                         <div class="nav-link-text">Main</div>
                     </a>
                 </li>
-                <li class="nav-link">
+                <li class="nav-link {% if is_history_active %}active{% endif %}">
                     <a href="{% url 'news_analyzer:history_page' %}" class="nav-link-content">
                         <span class="nav-link-icon">
                             <img src="{% static 'news_analyzer/img/history.svg' %}" alt="history-icon">
@@ -34,8 +36,8 @@
                         <div class="nav-link-text">History</div>
                     </a>
                 </li>
-                <li class="nav-link">
-                    <a href="#" class="nav-link-content">
+                <li class="nav-link {% if is_analytics_active %}active{% endif %}">
+                    <a href="{% url 'news_analyzer:analytics_page' %}" class="nav-link-content">
                         <span class="nav-link-icon">
                             <img src="{% static 'news_analyzer/img/analysis.svg' %}" alt="analysis-icon">
                         </span>
@@ -70,7 +72,7 @@
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'news_analyzer/js/index.js' %}"></script>
     <script src="{% static 'news_analyzer/js/paginator.js' %}"></script>
 </body>

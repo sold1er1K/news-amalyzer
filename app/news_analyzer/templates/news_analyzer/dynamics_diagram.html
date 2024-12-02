@@ -1,0 +1,57 @@
+{% extends 'news_analyzer/layout.html' %}
+
+{% block content %}
+<div class="diagrams-container">
+    <canvas id="newsTimelineChart"></canvas>
+</div>
+<a href="{% url 'news_analyzer:analytics_page' %}" class="return-button">Вернуться назад</a>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const ctx = document.getElementById('newsTimelineChart').getContext('2d');
+
+        const chartData = {
+            labels: {{ labels|safe }}, // Список дат, передаваемый из представления
+            datasets: [{
+                label: 'Количество проверенных новостей',
+                data: {{ counts|safe }}, // Список значений, передаваемых из представления
+                borderColor: '#007bff',
+                backgroundColor: 'rgba(0, 123, 255, 0.2)',
+                borderWidth: 2,
+                tension: 0.4, // Сглаживание линии
+                fill: true, // Заполнение под линией
+            }]
+        };
+
+        const chartOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    display: true,
+                    position: 'top',
+                },
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Дата',
+                    },
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Количество новостей',
+                    },
+                    beginAtZero: true,
+                },
+            },
+        };
+
+        new Chart(ctx, {
+            type: 'line', // Линейная диаграмма
+            data: chartData,
+            options: chartOptions,
+        });
+    });
+</script>
+{% endblock %}

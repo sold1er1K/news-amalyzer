@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Count
+from django.db.models.functions import TruncDay
+from django.shortcuts import render, get_object_or_404
 from django.conf import settings
 import json
 import re
@@ -10,6 +13,7 @@ import pandas as pd
 from .models import News
 import joblib
 import os
+import math
 
 
 
@@ -20,16 +24,56 @@ def main_page(request):
 def history_page(request):
     news_list = News.objects.all()
     paginator = Paginator(news_list, 12)
-    page_number = request.GET.get('page', 1)  # По умолчанию 1-я страница
+    page_number = request.GET.get('page', 1)
     try:
         page_obj = paginator.get_page(page_number)
     except EmptyPage:
-        page_obj = paginator.get_page(paginator.num_pages)  # Если страница не существует, показываем последнюю
+        page_obj = paginator.get_page(paginator.num_pages)
 
-    # Передаем актуальное количество страниц в шаблон
     return render(request, 'news_analyzer/history.html', {
         'page_obj': page_obj,
-        'total_pages': paginator.num_pages  # Добавляем общее количество страниц
+        'total_pages': paginator.num_pages
+    })
+
+
+def distribution_diagram(request):
+    total_news = News.objects.count()
+    fake_news_count = News.objects.filter(is_fake=True).count()
+    real_news_count = total_news - fake_news_count
+
+    fake_percentage = (fake_news_count / total_news) * 100 if total_news else 0
+    real_percentage = (real_news_count / total_news) * 100 if total_news else 0
+
+    context = {
+        'fake_percentage': fake_percentage,
+        'real_percentage': real_percentage,
+        'is_analytics_active': True
+    }
+    return render(request, 'news_analyzer/distribution_diagram.html', context)
+
+
+def dynamics_diagram(request):
+    news_data = (
+        News.objects.annotate(date=TruncDay('created_at'))
+        .values('date')
+        .annotate(count=Count('id'))
+        .order_by('date')
+    )
+
+    labels = [data['date'].strftime('%Y-%m-%d') for data in news_data]
+    counts = [data['count'] for data in news_data]
+
+    context = {
+        'labels': labels,
+        'counts': counts,
+        'is_analytics_active': True
+    }
+    return render(request, 'news_analyzer/dynamics_diagram.html', context)
+
+
+def analytics_page(request):
+    return render(request, 'news_analyzer/analytics.html', {
+        'is_analytics_active': True
     })
 
 
@@ -152,3 +196,12 @@ def add_news(request):
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
     else:
         return JsonResponse({'error': 'Invalid HTTP method. Use POST.'}, status=405)
+
+
+
+def news_detail(request, news_id):
+    news = get_object_or_404(News, id=news_id)
+    return render(request, 'news_analyzer/news_detail.html', {
+        'is_history_active': True,
+        'news': news
+    })
