@@ -22,7 +22,7 @@ def main_page(request):
 
 
 def history_page(request):
-    news_list = News.objects.all()
+    news_list = News.objects.all().order_by('-created_at')
     paginator = Paginator(news_list, 12)
     page_number = request.GET.get('page', 1)
     try:
